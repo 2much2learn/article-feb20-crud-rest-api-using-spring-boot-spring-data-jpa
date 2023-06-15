@@ -54,7 +54,7 @@ spring:
   data:
     mongodb:
       database: test
-      port: 27017
+      port: 28017
 
   mongodb:
     embedded:

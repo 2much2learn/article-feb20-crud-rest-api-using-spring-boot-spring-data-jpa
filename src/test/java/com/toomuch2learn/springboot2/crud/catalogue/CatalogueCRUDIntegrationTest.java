@@ -6,7 +6,9 @@ import com.toomuch2learn.springboot2.crud.catalogue.model.CatalogueItem;
 import com.toomuch2learn.springboot2.crud.catalogue.model.CatalogueItemList;
 import com.toomuch2learn.springboot2.crud.catalogue.model.Category;
 import com.toomuch2learn.springboot2.crud.catalogue.model.ResourceIdentity;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.*;
+import org.springframework.boot.test.autoconfigure.data.mongo.AutoConfigureDataMongo;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
@@ -19,6 +21,7 @@ import org.springframework.util.CollectionUtils;
 import java.util.Arrays;
 import java.util.Date;
 
+@AutoConfigureDataMongo
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class CatalogueCRUDIntegrationTest {
@@ -56,7 +59,7 @@ public class CatalogueCRUDIntegrationTest {
 
 		ResourceIdentity resourceIdentity = response.getBody();
 
-		Assertions.assertTrue(resourceIdentity != null && resourceIdentity.getId() != null && resourceIdentity.getId() != 0);
+		Assertions.assertTrue(resourceIdentity != null && resourceIdentity.getId() != null && StringUtils.isNotEmpty(resourceIdentity.getId()));
 	}
 
 	@Test

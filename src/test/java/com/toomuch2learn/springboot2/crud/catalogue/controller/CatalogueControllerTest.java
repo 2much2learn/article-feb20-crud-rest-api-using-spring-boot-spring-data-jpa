@@ -13,13 +13,10 @@ import com.toomuch2learn.springboot2.crud.catalogue.service.FileStorageService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
@@ -33,9 +30,7 @@ import static org.mockito.BDDMockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@ExtendWith(SpringExtension.class)
-@SpringBootTest
-@AutoConfigureMockMvc
+@WebMvcTest
 class CatalogueControllerTest {
 
     @Autowired
@@ -108,7 +103,7 @@ class CatalogueControllerTest {
         String skuNumber = "SKUNUMBER-1234";
         try {
             CatalogueItem catalogueItem = prepareCatalogueItem(skuNumber);
-            given(catalogueCrudService.addCatalogItem(catalogueItem)).willReturn(Long.valueOf(1));
+            given(catalogueCrudService.addCatalogItem(catalogueItem)).willReturn(String.valueOf(1));
 
             MvcResult result
                 = this.mockMvc
@@ -123,7 +118,7 @@ class CatalogueControllerTest {
             // Compare response object skuNumber to the expected one
             Assertions.assertEquals(
                 objectMapper.readValue(result.getResponse().getContentAsString(), ResourceIdentity.class).getId(),
-                1
+                    String.valueOf(1)
             );
         }
         catch(Exception e) {
@@ -212,7 +207,7 @@ class CatalogueControllerTest {
             catalogueItem.setDescription("");
             catalogueItem.setName("");
 
-            given(catalogueCrudService.addCatalogItem(catalogueItem)).willReturn(Long.valueOf(1));
+            given(catalogueCrudService.addCatalogItem(catalogueItem)).willReturn(String.valueOf(1));
 
             MvcResult result
                 = this.mockMvc

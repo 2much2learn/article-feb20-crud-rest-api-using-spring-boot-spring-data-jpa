@@ -27,7 +27,7 @@ public class CatalogueCrudService {
         return getCatalogueItemBySku(skuNumber);
     }
 
-    public Long addCatalogItem(CatalogueItem catalogueItem) {
+    public String addCatalogItem(CatalogueItem catalogueItem) {
         catalogueItem.setCreatedOn(new Date());
 
         return catalogueRepository.save(catalogueItem).getId();

@@ -10,5 +10,5 @@ import lombok.NonNull;
 @AllArgsConstructor
 public class ResourceIdentity {
 
-    @NonNull private Long id;
+    @NonNull private String id;
 }

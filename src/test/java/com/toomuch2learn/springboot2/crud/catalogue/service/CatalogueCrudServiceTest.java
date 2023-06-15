@@ -38,13 +38,13 @@ public class CatalogueCrudServiceTest {
     public void testAddCatalogueItem() {
         try {
             CatalogueItem item = prepareCatalogueItem(skuNumber);
-            item.setId(Long.valueOf(1));
+            item.setId(String.valueOf(1));
 
             given(catalogueRepository.save(any())).willReturn(item);
 
             Assertions.assertEquals(
                 catalogueCrudService.addCatalogItem(prepareCatalogueItem(skuNumber)),
-                Long.valueOf(1)
+                String.valueOf(1)
             );
         }
         catch(Exception e) {

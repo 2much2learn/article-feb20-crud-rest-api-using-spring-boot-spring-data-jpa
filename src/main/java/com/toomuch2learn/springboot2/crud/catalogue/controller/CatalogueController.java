@@ -46,7 +46,7 @@ public class CatalogueController {
     @ResponseStatus(value = HttpStatus.CREATED)
     public ResponseEntity<ResourceIdentity> addCatalogueItem(@Valid @RequestBody CatalogueItem catalogueItem) {
 
-        Long id = catalogueCrudService.addCatalogItem(catalogueItem);
+        String id = catalogueCrudService.addCatalogItem(catalogueItem);
 
         return new ResponseEntity<>(new ResourceIdentity(id), HttpStatus.CREATED) ;
     }

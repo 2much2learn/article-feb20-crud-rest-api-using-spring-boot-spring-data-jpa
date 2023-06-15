@@ -5,16 +5,17 @@ import com.toomuch2learn.springboot2.crud.catalogue.model.CatalogueItem;
 import com.toomuch2learn.springboot2.crud.catalogue.model.Category;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.boot.test.autoconfigure.data.mongo.AutoConfigureDataMongo;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.util.CollectionUtils;
 
 import java.util.Date;
 
-@ExtendWith(SpringExtension.class)
-@DataJpaTest
+@AutoConfigureDataMongo
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class CatalogueRepositoryTest {
 
     @Autowired
